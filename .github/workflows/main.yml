@@ -22,9 +22,9 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "jarvis@2024" -Force)
     - name: Create RDP Tunnel
-      run: start .\ngrok\ngrok.exe tcp 3389
+      run: start /B "" .\ngrok\ngrok.exe tcp 3389
     - name: Disable Firewall
       run: netsh advfirewall set allprofiles state off
-    - name: Create tcp Tunnel
-      run: .\ngrok\ngrok.exe tcp 8089
+    - name: Create HTTP Tunnel
+      run: start /B "" .\ngrok\ngrok.exe http 8089
 
