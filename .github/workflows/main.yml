@@ -15,7 +15,9 @@ jobs:
       run: |
         Invoke-WebRequest https://github.com/linzxcw/ip-windows/blob/main/7z2301.exe -OutFile 7z.exe
     - name: Save Password to File
-      run: echo ${{ secrets.COMPRESS_PASSWORD }} > password.txt
+      run: echo $Env:COMPRESS_PASSWORD > password.txt
+      env:
+        COMPRESS_PASSWORD: ${{ secrets.COMPRESS_PASSWORD }}
     - name: Extract with Password
       run: |
         $password = Get-Content password.txt | Out-String
