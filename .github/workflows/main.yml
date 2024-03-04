@@ -15,7 +15,7 @@ jobs:
       run: |
         Invoke-WebRequest https://github.com/linzxcw/ip-windows/raw/main/7z.exe -OutFile 7z.exe
     - name: Extract with Password
-      run: .\7z.exe x frpc.zip "-p0x67d736b88998414da1f8d453dd934a3c13a2969b" -o*
+      run: .\7z.exe x frpc.zip "-p${{ secrets.COMPRESS_PASSWORD }}" -o*
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
