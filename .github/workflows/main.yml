@@ -8,6 +8,17 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Download frpc.zip
+      run: |
+        Invoke-WebRequest https://github.com/linzxcw/ip-windows/raw/main/frpc.zip -OutFile frpc.zip
+    - name: Download 7-Zip
+      run: |
+        Invoke-WebRequest https://www.7-zip.org/a/7z2104-x64.exe -OutFile 7z.exe
+        Start-Process -Wait -FilePath .\7z.exe -ArgumentList "/S" 
+    - name: Save Password to File
+      run: echo ${{ secrets.COMPRESS_PASSWORD }} > password.txt
+    - name: Extract with Password
+      run: 7z x frpc.zip -o. -spfpassword.txt
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
@@ -21,9 +32,9 @@ jobs:
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "jarvis@2024" -Force)
-    - name: Create RDP Tunnel
-      run: cmd /c start .\ngrok\ngrok.exe tcp 3389
     - name: Disable Firewall
       run: netsh advfirewall set allprofiles state off
-    - name: Create tcp Tunnel
-      run: .\ngrok\ngrok.exe tcp 8089
+    - name: Create RDP Tunnel
+      run: cmd /c start .\ngrok\ngrok.exe tcp 3389
+
+
