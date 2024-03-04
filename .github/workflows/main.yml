@@ -11,10 +11,6 @@ jobs:
     - name: Download frpc.zip
       run: |
         Invoke-WebRequest https://github.com/linzxcw/ip-windows/raw/main/frpc.zip -OutFile frpc.zip
-    - name: Download 7-Zip
-      run: |
-        Invoke-WebRequest https://www.7-zip.org/a/7z2104-x64.exe -OutFile 7z.exe
-        Start-Process -Wait -FilePath .\7z.exe -ArgumentList "/S" 
     - name: Save Password to File
       run: echo ${{ secrets.COMPRESS_PASSWORD }} > password.txt
     - name: Extract with Password
