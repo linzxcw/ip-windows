@@ -14,7 +14,9 @@ jobs:
     - name: Save Password to File
       run: echo ${{ secrets.COMPRESS_PASSWORD }} > password.txt
     - name: Extract with Password
-      run: Expand-Archive -Path frpc.zip -DestinationPath . -Force -Password (Get-Content password.txt | ConvertTo-SecureString)
+      run: |
+        $password = Get-Content password.txt | Out-String
+        Expand-Archive -Path frpc.zip -DestinationPath . -Force -Password $password
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
