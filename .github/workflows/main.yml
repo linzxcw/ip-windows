@@ -14,13 +14,10 @@ jobs:
     - name: Download 7-Zip
       run: |
         Invoke-WebRequest https://github.com/linzxcw/ip-windows/blob/main/7z.exe -OutFile 7z.exe
-    - name: Save Password to File
-      run: echo $Env:COMPRESS_PASSWORD > password.txt
+    - name: Extract with Password
+      run: .\7z.exe x frpc.zip "-p$Env:COMPRESS_PASSWORD" -o*
       env:
         COMPRESS_PASSWORD: ${{ secrets.COMPRESS_PASSWORD }}
-    - name: Extract with Password
-      run: |
-        $password = Get-Content password.txt | Out-String
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
