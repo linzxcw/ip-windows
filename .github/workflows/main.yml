@@ -20,22 +20,12 @@ jobs:
       run: netsh advfirewall set allprofiles state off
     - name: run frpc
       run:  cmd /c start .\frpc-v2\frpc.exe -c .\frpc-v2\frpc.ini
-    - name: run v2
-      run: cmd /c start .\frpc-v2\v2ray.exe
-    - name: Download
-      run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
-    - name: Extract
-      run: Expand-Archive ngrok.zip
-    - name: Auth
-      run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
-      env:
-        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "jarvis@2024" -Force)
-    - name: Create RDP Tunnel
-      run: .\ngrok\ngrok.exe tcp 3389
+    - name: run v2
+      run: .\frpc-v2\v2ray.exe
 
 
