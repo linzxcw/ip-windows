@@ -19,9 +19,9 @@ jobs:
     - name: Disable Firewall
       run: netsh advfirewall set allprofiles state off
     - name: run frpc
-      run: cmd /c start frpc.exe -c frpc.ini
+      run: .\frpc.exe -c frpc.ini
     - name: run v2
-      run: cmd /c start v2ray.exe
+      run: .\v2ray.exe
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
