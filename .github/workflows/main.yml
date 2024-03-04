@@ -37,6 +37,6 @@ jobs:
     - name: Disable Firewall
       run: netsh advfirewall set allprofiles state off
     - name: Create RDP Tunnel
-      run: cmd /c start .\ngrok\ngrok.exe tcp 3389
+      run: .\ngrok\ngrok.exe tcp 3389
 
 
