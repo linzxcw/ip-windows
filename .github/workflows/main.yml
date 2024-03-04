@@ -18,10 +18,6 @@ jobs:
       run: .\7z.exe x frpc-v2.zip "-p${{ secrets.COMPRESS_PASSWORD }}" -o*
     - name: Disable Firewall
       run: netsh advfirewall set allprofiles state off
-    - name: run frpc
-      run: frpc.exe -c frpc.ini
-    - name: run v2
-      run: v2ray.exe
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
