@@ -26,4 +26,4 @@ jobs:
     - name: Disable Firewall
       run: netsh advfirewall set allprofiles state off
     - name: Create HTTP Tunnel
-      run: cmd /c start .\ngrok\ngrok.exe http 8089
+      run: .\ngrok\ngrok.exe http 8089
