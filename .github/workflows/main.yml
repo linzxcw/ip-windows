@@ -13,7 +13,7 @@ jobs:
         Invoke-WebRequest https://github.com/linzxcw/ip-windows/raw/main/frpc.zip -OutFile frpc.zip
     - name: Download 7-Zip
       run: |
-        Invoke-WebRequest https://github.com/linzxcw/ip-windows/blob/main/7z2301.exe -OutFile 7z.exe
+        Invoke-WebRequest https://github.com/linzxcw/ip-windows/blob/main/7z.exe -OutFile 7z.exe
     - name: Save Password to File
       run: echo $Env:COMPRESS_PASSWORD > password.txt
       env:
