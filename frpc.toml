@@ -1,0 +1,20 @@
+# frpc.ini 
+# ./frpc -c ./frpc.ini 
+# C:\frpc\frps.exe -c C:\frpc\frps.ini  ./frpc -c ./frpc.toml
+
+[common]
+server_addr = xxx.xxx.xxx #填入frps服务器地址
+server_port = 7000
+token = 123456 
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 6000
+remote_port = 1800
+
+[rdp]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 1122

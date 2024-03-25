@@ -1,0 +1,54 @@
+{
+
+    "inbounds": [{
+            "listen": "0.0.0.0",
+            "port": 6000,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [{
+                        "id": "ec8e0557-b5c9-af3a-d8d0-c8b076081313"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+             "network": "tcp",
+             "tcpSettings": {
+               "header": {
+               "request": {
+                  "headers": {
+                    "Host": [
+                    ]
+                   },
+                   "path": [
+                      "/"
+                   ]
+                  },
+                  "type": "http"
+                 }
+              },
+               "security": "none"
+             }
+        }
+    ],
+    "outbounds": [{
+            "protocol": "freedom",
+            "settings": {}
+        }
+    ]
+}
+
+
+[Unit]
+Description=backend service  
+After=docker.service
+
+[Service]
+Type=forking
+ExecStart=/v2/v2ray.sh start
+ExecReload=/v2/v2ray.sh restart
+ExecStop=/v2/v2ray.sh stop
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
